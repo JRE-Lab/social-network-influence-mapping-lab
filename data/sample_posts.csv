@@ -1,0 +1,19 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/data/sample_posts.csv b/data/sample_posts.csv
+new file mode 100644
+index 0000000000000000000000000000000000000000..08e0eabcb1b342642681cc655fb047075f581a2a
+--- /dev/null
++++ b/data/sample_posts.csv
+@@ -0,0 +1,9 @@
++post_id,user,text,mentions,reply_to,reshared_from,hashtags
++1,atlaswatch,"Shipping delays reported from the port.",harborintel,,,#logistics,trade
++2,harborintel,"Tracking new vessels today.",atlaswatch,,,#shipping,logistics
++3,portpulse,"Retweeting atlaswatch update.",,,atlaswatch,#logistics
++4,tradebeacon,"Replying to harborintel with new manifests.",,harborintel,,#trade
++5,atlaswatch,"Mentioning portpulse for coverage.",portpulse,,,#logistics
++6,signalgrid,"Analyzing supply chain disruptions.",atlaswatch,portpulse,,#analysis,logistics
++7,portpulse,"Mentioning tradebeacon on tariffs.",tradebeacon,,,#trade,policy
++8,harborintel,"Reshared signalgrid briefing.",,,signalgrid,#analysis
+ 
+EOF
+)
