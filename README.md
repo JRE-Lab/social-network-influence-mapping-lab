@@ -14,22 +14,45 @@ You will:
 
 All data in this lab is gathered from public sources. No private or sensitive data is required.
 
++
++---
++
++## Contents
++
++- [Overview](#overview)
++- [Workflow](#workflow)
++- [Repository structure](#repository-structure)
++- [Quick start](#quick-start)
++- [Data schema](#data-schema)
++- [Next steps](#next-steps)
++
++---
+ 
 
-+## Lab workflow
++## Workflow
 +
 +1. **Collect**: Export public posts into a CSV.
-+2. **Normalize**: Ensure each row contains an author, interactions, and metadata.
-+3. **Build the graph**: Use the provided script to generate a GraphML network.
-+4. **Assess influence**: Review the centrality rankings and visualize the graph in a tool like Gephi.
-+5. **Brief**: Summarize the top influencers, clusters, and alternative explanations.
++2. **Normalize**: Ensure each row contains an author and interactions.
++3. **Build the graph**: Use the provided script to generate GraphML.
++4. **Assess influence**: Review rankings or visualize in Gephi.
++5. **Brief**: Summarize key accounts, clusters, and alternatives.
++
++---
 +
 +## Repository structure
 +
-+- `data/sample_posts.csv`: Sample dataset with posts, mentions, replies, reshares, and hashtags.
-+- `src/build_graph.py`: Script that constructs the influence graph and prints top influencers.
-+- `requirements.txt`: Python dependencies.
++```
++.
++├── data/
++│   └── sample_posts.csv
++├── src/
++│   └── build_graph.py
++└── requirements.txt
++```
 +
-+## Getting started
++---
++
++## Quick start
 +
 +### 1) Create a virtual environment (optional)
 +
@@ -47,14 +70,19 @@ All data in this lab is gathered from public sources. No private or sensitive da
 +### 3) Run the lab script
 +
 +```bash
-+python src/build_graph.py data/sample_posts.csv --output influence_graph.graphml --top 5
++python src/build_graph.py data/sample_posts.csv \
++  --output influence_graph.graphml \
++  --top 5
 +```
 +
-+The script prints the top accounts/hashtags by degree and betweenness centrality, then writes a GraphML file you can load into Gephi.
++The script prints the top accounts/hashtags by **degree** and **betweenness**
++centrality, then writes `influence_graph.graphml` for tools like **Gephi**.
 +
-+## Data format
++---
 +
-+Use a CSV with the following headers:
++## Data schema
++
++Use a CSV with these headers:
 +
 +| Column | Description |
 +| --- | --- |
@@ -66,9 +94,24 @@ All data in this lab is gathered from public sources. No private or sensitive da
 +| `reshared_from` | Account the post reshared/retweeted |
 +| `hashtags` | Comma-separated list of hashtags |
 +
-+## Next steps
++**Example row:**
 +
++```csv
++post_id,user,text,mentions,reply_to,reshared_from,hashtags
++42,atlaswatch,"Shipping delays reported.",harborintel,,,#logistics,trade
++```
++
++---
+ 
+-- **Define the scope**: Choose a topic or region and specify the time period and platforms to examine.
+-- **Collect OSINT**: Use tools like `snscrape`, platform APIs or search to gather public posts, comments or hashtags related to your topic.
+-- **Ingest and normalise**: Parse posts into a structured dataset with entities (users, hashtags) and interactions (mentions, replies, retweets).
+-- **Build a graph**: Use Python and NetworkX to create a graph where nodes represent entities and edges represent interactions. Calculate centrality metrics to identify influential accounts.
+-- **Analyse and brief**: Interpret the network structure to highlight clusters, key influencers and propagation pathways. Apply abductive reasoning to consider alternative explanations and record confidence levels.
++## Next steps
+ 
+-All data in this lab is gathered from public sources. No private or sensitive data is required.
 +- Replace `data/sample_posts.csv` with your collected dataset.
-+- Add additional node attributes (language, location, timestamp) for deeper analysis.
-+- Use graph clustering (e.g., Louvain) to identify communities.
-+- Export summary findings into a briefing template.
++- Add node attributes (language, location, timestamp) for deeper analysis.
++- Run clustering (e.g., Louvain) to identify communities.
++- Export findings into your briefing template.
